@@ -3,11 +3,21 @@ const express = require("express");
 const path = require("path");
 const PORT = 5000;
 const Joi = require('joi');
+var cors = require('cors')
+const bodyParser = require('body-parser')
 
 const app = express();
+
+app.use(cors());
+// app.options('*', cors());
+
 app.use(express.static(path.join(__dirname, "public")));
 // Middleware to parse JSON bodies
-app.use(express.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded())
+
+// parse application/json
+app.use(bodyParser.json())
 
 const customMiddleware = (req, res, next) => {
   console.log("Custom middleware called");
@@ -30,8 +40,14 @@ app.get("/", (req, res) => {
   res.end();
 });
 
-app.post("/login", customMiddleware, async(req, res) => {
+app.post("/login", customMiddleware, async (req, res) => {
   try {
+
+
+    const response = await fetch("https://jsonplaceholder.typicode.com/postss").catch(e => e.message);
+    console.log(response);
+    throw new Error("test");
+
     // validation
     const joiSchema = Joi.object({
       username: Joi.string()
@@ -72,7 +88,20 @@ app.post("/login", customMiddleware, async(req, res) => {
 
 // import todosRoute from "./routes/todos.route.js";
 const todosRoute = require("./routes/todos.route.js");
+const notesRoute = require("./routes/notes.route.js");
+const db = require("./models");
+
+// Test database connection on startup
+db.sequelize.authenticate()
+  .then(() => {
+    console.log('Database connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 app.use("/todos", todosRoute);
+app.use("/notes", notesRoute);
 
 // middleware for error 404 routes
 app.use((req, res, next) => {

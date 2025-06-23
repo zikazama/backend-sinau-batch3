@@ -1,0 +1,47 @@
+{
+  "development": {
+    "username": "neondb_owner",
+    "password": "npg_t6HGBzbEsMI4",
+    "database": "todos",
+    "host": "ep-raspy-rain-a1t1ypwk-pooler.ap-southeast-1.aws.neon.tech",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "logging": true
+  },
+  "test": {
+    "username": "neondb_owner",
+    "password": "npg_t6HGBzbEsMI4",
+    "database": "todos_test",
+    "host": "ep-raspy-rain-a1t1ypwk-pooler.ap-southeast-1.aws.neon.tech",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "logging": false
+  },
+  "production": {
+    "username": "neondb_owner",
+    "password": "npg_t6HGBzbEsMI4",
+    "database": "todos",
+    "host": "ep-raspy-rain-a1t1ypwk-pooler.ap-southeast-1.aws.neon.tech",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "logging": false
+  }
+}
